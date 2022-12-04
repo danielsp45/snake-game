@@ -64,7 +64,8 @@ def game_loop():
         # colisão com a maçã
         if collision(snake[0], apple_pos):
             apple_pos = on_grid_random()
-            snake.append((0,0))
+            snake.append(snake[1])
+
 
         # condição para determinar se a cobra morreu (Ainda não cosnegui por a funcionar)
         for i in range(1, len(snake)):
