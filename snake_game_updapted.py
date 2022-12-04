@@ -48,6 +48,10 @@ def game_loop():
                 if event.key == K_RIGHT:
                     snake_direction = RIGHT
 
+        # movimento da cobra
+        for i in range(len(snake)-1, 0, -1):
+            snake[i] = (snake[i-1][0], snake[i-1][1])
+
         if snake_direction == UP:
             snake[0] = (snake[0][0], snake[0][1] - 10)
         elif snake_direction == DOWN:
@@ -57,19 +61,15 @@ def game_loop():
         elif snake_direction == RIGHT:
             snake[0] = (snake[0][0] + 10, snake[0][1])
 
-        # movimento da cobra
-        for i in range(len(snake)-1, 0, -1):
-            snake[i] = (snake[i-1][0], snake[i-1][1])
-
         # colisão com a maçã
         if collision(snake[0], apple_pos):
             apple_pos = on_grid_random()
             snake.append((0,0))
 
         # condição para determinar se a cobra morreu (Ainda não cosnegui por a funcionar)
-        # for i in range(1, len(snake)):
-        #     if collision(snake[0], snake[i]):
-        #         game_end = True
+        for i in range(1, len(snake)):
+            if collision(snake[0], snake[i]):
+                game_end = True
 
         # condition to determine if the snake has hit the wall
         if snake[0][0] < 0 or snake[0][0] > 590 and snake[0][1] < 0 or snake[0][1] > 590:
