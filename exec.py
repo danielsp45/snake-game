@@ -89,4 +89,5 @@ def game_loop():
     pygame.quit()
 
 
-game_loop()
+if __name__ == '__main__':
+    game_loop()
