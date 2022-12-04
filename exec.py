@@ -67,7 +67,7 @@ def game_loop():
             snake.append(snake[1])
 
 
-        # condição para determinar se a cobra morreu (Ainda não cosnegui por a funcionar)
+        # condição para determinar se a cobra morreu
         for i in range(1, len(snake)):
             if collision(snake[0], snake[i]):
                 game_end = True
