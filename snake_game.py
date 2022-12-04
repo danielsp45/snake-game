@@ -31,7 +31,9 @@ my_direction = LEFT
 clock = pygame.time.Clock()
 
 while True:
+    game_end = False
     clock.tick(10)
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
