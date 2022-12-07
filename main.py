@@ -15,9 +15,6 @@ def on_grid_random():
     y = random.randint(0, 590)
     return (x//10 * 10, y//10 * 10)
 
-def collision(c1, c2):
-    return (c1[0] == c2[0]) and (c1[1] == c2[1])
-
 def game_loop():
     game_end = False
 
@@ -53,6 +50,7 @@ def game_loop():
         for i in range(len(snake)-1, 0, -1):
             snake[i] = (snake[i-1][0], snake[i-1][1])
 
+        # mudança de direção da cobra
         if snake_direction == UP:
             snake[0] = (snake[0][0], snake[0][1] - 10)
         elif snake_direction == DOWN:
@@ -61,18 +59,19 @@ def game_loop():
             snake[0] = (snake[0][0] - 10, snake[0][1])
         elif snake_direction == RIGHT:
             snake[0] = (snake[0][0] + 10, snake[0][1])
+        snake_head = snake[0]
 
         # colisão com a maçã
-        if snake_head[0] == apple_pos[0]) and (snake_head[1] == apple_pos[1]:
+        if snake_head[0] == apple_pos[0] and snake_head[1] == apple_pos[1]:
             apple_pos = on_grid_random()
             snake.append(snake[1])
 
 
         # condição para determinar se a cobra bateu em si própria
         for i in range(1, len(snake)):
-            if collision(snake[0], snake[i]):
+            if snake_head[0] == snake[i][0] and snake_head[1] == snake[i][1]:
                 game_end = True
-                    break
+                break
 
         # condição para determinar se a cobra bateu na parede
         if snake_head[0] < 0 or snake_head[0] > 590 and snake_head[1] < 0 or snake_head[1] > 590:
