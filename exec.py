@@ -22,9 +22,10 @@ def game_loop():
     game_end = False
 
     snake_direction = LEFT
-    snake = [(200, 200), (210, 200), (220,200)]
+    snake = [(200, 200), (210, 200), (220, 200)]
     snake_skin = pygame.Surface((10,10))
     snake_skin.fill((255,255,255))
+    snake_head = snake[0]
 
     apple_pos = on_grid_random()
     apple = pygame.Surface((10,10))
@@ -62,25 +63,27 @@ def game_loop():
             snake[0] = (snake[0][0] + 10, snake[0][1])
 
         # colisão com a maçã
-        if collision(snake[0], apple_pos):
+        if snake_head[0] == apple_pos[0]) and (snake_head[1] == apple_pos[1]:
             apple_pos = on_grid_random()
             snake.append(snake[1])
 
 
-        # condição para determinar se a cobra morreu
+        # condição para determinar se a cobra bateu em si própria
         for i in range(1, len(snake)):
             if collision(snake[0], snake[i]):
                 game_end = True
+                    break
 
-        # condition to determine if the snake has hit the wall
-        if snake[0][0] < 0 or snake[0][0] > 590 and snake[0][1] < 0 or snake[0][1] > 590:
+        # condição para determinar se a cobra bateu na parede
+        if snake_head[0] < 0 or snake_head[0] > 590 and snake_head[1] < 0 or snake_head[1] > 590:
             game_end = True
 
 
-        # desenho das figuras
+        # desenho da maça
         screen.fill((0,0,0))
         screen.blit(apple, apple_pos)
 
+        # desenho da cobra
         for pos in snake:
             screen.blit(snake_skin, pos)
 
